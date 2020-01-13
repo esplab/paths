@@ -6,24 +6,8 @@
 #include <stdlib.h> /* getenv */
 #include <string>
 #include <vector>
-#include "boost/filesystem.hpp"
-
-std::vector<std::string> split(std::string s, std::string delimiter)
-{
-  size_t pos_start = 0, pos_end, delim_len = delimiter.length();
-  std::string token;
-  std::vector<std::string> res;
-
-  while ((pos_end = s.find(delimiter, pos_start)) != std::string::npos)
-  {
-    token = s.substr(pos_start, pos_end - pos_start);
-    pos_start = pos_end + delim_len;
-    res.push_back(token);
-  }
-
-  res.push_back(s.substr(pos_start));
-  return res;
-}
+#include <boost/filesystem.hpp>
+#include <boost/algorithm/string.hpp>
 
 int main()
 {
@@ -32,7 +16,11 @@ int main()
 
   std::string delimiter = ":";
 
-  std::vector<std::string> folders = split(systemPath, delimiter);
+  // std::vector<std::string> folders = split(systemPath, delimiter);
+
+  std::vector<std::string> folders;
+
+  boost::split(folders, systemPath, boost::is_any_of(delimiter));
 
   for (auto part : folders)
   {
