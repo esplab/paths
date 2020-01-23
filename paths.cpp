@@ -42,10 +42,7 @@ int main()
 {
 
   std::string systemPath = getenv("PATH");
-  std::string delimiter = ":";
-  std::vector<std::string> folders;
-
-  folders = split(systemPath, delimiter);
+  std::vector<std::string> folders = split(systemPath, ":");
 
   for (auto part : folders)
   {
