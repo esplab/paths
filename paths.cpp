@@ -44,14 +44,28 @@ int main()
   std::string systemPath = getenv("PATH");
   std::vector<std::string> folders = split(systemPath, ":");
 
+  std::string red = "\033[1;31m";
+  std::string green = "\033[1;32m";
+  std::string reset = "\033[0m";
+  bool exist;
+
   for (auto part : folders)
   {
-    if (!IsPathExist(part))
+
+    exist = IsPathExist(part);
+
+    if (!exist)
     {
-      std::cout << "*";
+      std::cout << red;
+    }
+    else
+    {
+      std::cout << green;
     }
 
-    std::cout << part << std::endl;
+    std::cout << part;
+
+    std::cout << reset << std::endl;
   }
 
   return 0;
