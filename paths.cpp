@@ -4,7 +4,7 @@
 #include <vector>
 #include <sys/stat.h>
 
-bool IsPathExist(const std::string &s)
+bool pathExists(const std::string &s)
 {
   struct stat buffer;
   return (stat(s.c_str(), &buffer) == 0);
@@ -52,7 +52,7 @@ int main()
   for (auto part : folders)
   {
 
-    exist = IsPathExist(part);
+    exist = pathExists(part);
 
     if (!exist)
     {
